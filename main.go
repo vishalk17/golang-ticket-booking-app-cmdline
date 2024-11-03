@@ -34,20 +34,24 @@ func main() {
 		fmt.Scan(&userTickets)
 		//fmt.Println(&userTickets)  // this will print the memory address of userTickets where it going to store value of variable
 
-		remainingTickets = remainingTickets - uint(userTickets)
+		if userTickets <= int(remainingTickets) {
+			remainingTickets = remainingTickets - uint(userTickets)
 
-		fmt.Printf("Thank you %v %v for booking %v tickets. You will receive confirmation Email at %v.\n", firstName, lastName, userTickets, email)
-		fmt.Printf("%v tickets remaining for %v\n", remainingTickets, conferenceName)
+			fmt.Printf("Thank you %v %v for booking %v tickets. You will receive confirmation Email at %v.\n", firstName, lastName, userTickets, email)
+			fmt.Printf("%v tickets remaining for %v\n", remainingTickets, conferenceName)
 
-		booking = append(booking, firstName+" "+lastName)
+			booking = append(booking, firstName+" "+lastName)
 
-		var firstNames = []string{}
-		for _, bookingEntry := range booking {
-			var splitName = strings.Fields(bookingEntry)
-			var splitted_first_name = splitName[0]
-			firstNames = append(firstNames, splitted_first_name)
+			var firstNames = []string{}
+			for _, bookingEntry := range booking {
+				var splitName = strings.Fields(bookingEntry)
+				var splitted_first_name = splitName[0]
+				firstNames = append(firstNames, splitted_first_name)
+			}
+
+			fmt.Printf("List of Bookings are: %v\n", firstNames)
+		} else {
+			fmt.Println("Sorry, we don't have enough tickets for you.")
 		}
-
-		fmt.Printf("List of Bookings are: %v\n", firstNames)
 	}
 }
