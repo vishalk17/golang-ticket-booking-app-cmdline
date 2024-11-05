@@ -34,7 +34,11 @@ func main() {
 		fmt.Scan(&userTickets)
 		//fmt.Println(&userTickets)  // this will print the memory address of userTickets where it going to store value of variable
 
-		if userTickets <= int(remainingTickets) {
+		isValidName := len(firstName) >= 2 && len(lastName) >= 2
+		isValidEmail := strings.Contains(email, "@")
+		isUserTickets := userTickets > 0 && userTickets <= int(remainingTickets)
+
+		if isUserTickets && isValidEmail && isValidName {
 			remainingTickets = remainingTickets - uint(userTickets)
 
 			fmt.Printf("Thank you %v %v for booking %v tickets. You will receive confirmation Email at %v.\n", firstName, lastName, userTickets, email)
@@ -50,8 +54,12 @@ func main() {
 			}
 
 			fmt.Printf("List of Bookings are: %v\n", firstNames)
-		} else {
-			fmt.Println("Sorry, we don't have enough tickets for you.")
+		} else if !isUserTickets {
+			fmt.Println("Error : Tickets value is wrong or exceed over available tickets")
+		} else if !isValidEmail {
+			fmt.Println("Error : Invalid Email address")
+		} else if !isValidName {
+			fmt.Println("Error : Name at least contains 2 characters")
 		}
 	}
 }
