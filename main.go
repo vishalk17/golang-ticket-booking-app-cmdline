@@ -36,7 +36,7 @@ func main() {
 
 			booking = append(booking, firstName+" "+lastName)
 
-			firstNames := getFirstNames(booking)
+			firstNames := getFirstNames()
 			fmt.Printf("List of Bookings are: %v\n", firstNames)
 
 		} else if !isUserTickets {
@@ -63,7 +63,7 @@ func validateUserinput() (bool, bool, bool) {
 	return isValidName, isValidEmail, isUserTickets
 }
 
-func getFirstNames(booking []string) []string {
+func getFirstNames() []string {
 	var firstNames = []string{}
 	for _, bookingEntry := range booking {
 		var splitName = strings.Fields(bookingEntry)
